@@ -21,9 +21,30 @@ prisma
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, PATCH, DELETE"
+  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
 
 app.get("/api/product", (req, res) => {
   productController.getAllProduct(req, res);
+});
+
+app.get("/api/product/:id", (req, res) => {
+  productController.getProductById(req, res);
+});
+
+app.get("/api/product/create", (req, res) => {
+  productController.createProduct(req, res);
+});
+
+app.delete("/api/product/:id", (req, res) => {
+  productController.deleteProduct(req, res);
 });
 
 app.listen(port, () => {
