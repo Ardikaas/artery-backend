@@ -1,0 +1,16 @@
+version: '4'
+
+nginx:
+  build: ./nginx
+  ports:
+    - "80:80"
+
+postgres:
+  image: postgres:14
+  restart: always
+  environtment:
+    POSTGRES_USER: Ardikaas
+    POSTGRES_PASSWORD: password
+    POSTGRES_DB: ecummerce
+  ports:
+    - '5432:5432'
