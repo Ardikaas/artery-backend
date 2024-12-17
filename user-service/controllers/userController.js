@@ -16,6 +16,7 @@ OAuth2_client.setCredentials({
 const prisma = new PrismaClient();
 const UserController = {
   getAllUsers,
+  getUserById,
   deleteUser,
   register,
   login,
@@ -43,6 +44,59 @@ async function getAllUsers(req, res) {
         message: "Success",
       },
       data: dataUsers,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: {
+        code: 500,
+        message: error.message,
+      },
+    });
+  }
+}
+
+async function getUserById(req, res) {
+  try {
+    const { id } = req.params;
+
+    const user = await prisma.user.findUnique({
+      where: { id: id },
+      select: {
+        id: true,
+        google_id: true,
+        discord_id: true,
+        username: true,
+        image_url: true,
+        role: true,
+        email: true,
+        isEmailValid: true,
+        phone_number: true,
+        balance: true,
+        first_name: true,
+        last_name: true,
+        market_id: true,
+        refresh_token: true,
+        userStatus: true,
+        lastLoginAt: true,
+        createdAt: true,
+        updateAt: true,
+      },
+    });
+    if (!user) {
+      return res.status(404).json({
+        status: {
+          code: 404,
+          message: "User not found",
+        },
+      });
+    }
+
+    res.status(200).json({
+      status: {
+        code: 200,
+        message: "Success",
+      },
+      data: user,
     });
   } catch (error) {
     res.status(500).json({
