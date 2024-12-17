@@ -30,8 +30,12 @@ app.get("/api", async (req, res) => {
   res.send("hai ngapain kesini");
 });
 
-app.get("/", async (req, res) => {
+app.get("/all", async (req, res) => {
   UserController.getAllUsers(req, res);
+});
+
+app.get("/:id", async (req, res) => {
+  UserController.getUserById(req, res);
 });
 
 app.delete("/:id", async (req, res) => {
