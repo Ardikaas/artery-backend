@@ -31,19 +31,19 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/api/product", (req, res) => {
+app.get("/", (req, res) => {
   productController.getAllProduct(req, res);
 });
 
-app.get("/api/product/:id", (req, res) => {
+app.get("/:id", (req, res) => {
   productController.getProductById(req, res);
 });
 
-app.get("/api/product/create", (req, res) => {
+app.get("/create", (req, res) => {
   productController.createProduct(req, res);
 });
 
-app.delete("/api/product/:id", (req, res) => {
+app.delete("/:id", (req, res) => {
   productController.deleteProduct(req, res);
 });
 
