@@ -31,19 +31,23 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/all", (req, res) => {
+app.get("/all", async (req, res) => {
   productController.getAllProduct(req, res);
 });
 
-app.get("/:id", (req, res) => {
+app.get("/search", async (req, res) => {
+  productController.searchProduct(req, res);
+});
+
+app.get("/:id", async (req, res) => {
   productController.getProductById(req, res);
 });
 
-app.get("/create", (req, res) => {
+app.get("/create", async (req, res) => {
   productController.createProduct(req, res);
 });
 
-app.delete("/:id", (req, res) => {
+app.delete("/:id", async (req, res) => {
   productController.deleteProduct(req, res);
 });
 
