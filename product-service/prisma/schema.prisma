@@ -15,12 +15,19 @@ datasource db {
 }
 
 model Product {
-  id               String   @id @default(cuid())
-  product_name     String
-  product_desc     String
-  product_category String
-  product_img      String   @default("https://defaultpicture")
-  price            Int
-  created_at       DateTime @default(now())
-  updateAt         DateTime @updatedAt
+  id         String   @id @default(cuid())
+  name       String
+  process    String
+  type       String
+  taste_note String
+  body_level Int
+  acid_level Int
+  price      Int
+  stock      Int
+  coffe_img  String   @default("https://defaultpicture")
+  shop_id    Int
+  shop_name  String
+  shop_img   String
+  created_at DateTime @default(now())
+  updateAt   DateTime @updatedAt
 }
